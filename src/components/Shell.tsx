@@ -52,6 +52,7 @@ export function Ikon({ ad, boyut = 16 }: { ad: keyof typeof IKONLAR; boyut?: num
 const ETKIN: Partial<Record<Route["page"], Route["page"][]>> = {
   sorular: ["sorular"],
   lab: ["lab"],
+  cikmis: ["cikmis"],
 };
 
 function NavLink({ to, current, ikon, children, ek }: {
@@ -238,7 +239,7 @@ export function Shell({ route, currentWeek, title, status, duyuru, children }: P
       <div className="menu-perde" onClick={() => setMenuAcik(false)} aria-hidden="true" />
       <aside className="flow-nav" id="ana-menu" aria-label="Ana menü">
         <div className="panel-title">
-          <span className="nav-ad">FLOW NAVIGATOR</span>
+          <span className="nav-ad">MENÜ</span>
           <button className="icon menu-daralt" onClick={() => darDegistir(!dar)} aria-label={dar ? "Menüyü genişlet" : "Menüyü daralt"} title={dar ? "Menüyü genişlet" : "Menüyü daralt"}>
             <Ikon ad={dar ? "genislet" : "daralt"} />
           </button>
@@ -253,6 +254,7 @@ export function Shell({ route, currentWeek, title, status, duyuru, children }: P
           ek={currentWeek !== null && currentWeek > 0 && <span className="nav-rozet" title={`Sorular ${currentWeek}. üniteye kadar açık`}>Ü{currentWeek}</span>}>
           Soru havuzu
         </NavLink>
+        <NavLink to={{ page: "cikmis" }} current={route} ikon="cikmis">Çıkmış sorular</NavLink>
         <NavLink to={{ page: "tekrar" }} current={route} ikon="tekrar"
           ek={tekrarSayisi > 0 && <span className="nav-rozet tekrar-rozet" title={`Bugün tekrar edilecek ${tekrarSayisi} soru`}>{tekrarSayisi}</span>}>
           Tekrar

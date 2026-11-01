@@ -52,7 +52,7 @@ function Baslik({ q, n, dersBagi, durum }: Required<Omit<KartOzellikleri, "durum
 
 // Soru metni; kod bloğu varsa önü, kod ve arkası ayrı öğeler olur (geniş
 // ekranda kod sağ sütuna yerleşir, dar ekranda sıra aynen korunur)
-function SoruMetni({ metin }: { metin: string }) {
+export function SoruMetni({ metin }: { metin: string }) {
   const p = koduAyir(metin);
   if (!p) return <Markdown text={metin} terim />;
   return (

@@ -5,6 +5,8 @@ import { useRoute, type Route } from "./lib/router";
 import { api } from "./lib/api";
 import { OturumSaglayici } from "./lib/oturum";
 import { Lab } from "./pages/Lab";
+import { Cikmis } from "./pages/Cikmis";
+import { sinavBul } from "./cikmis/sinavlar";
 import { Ders } from "./pages/Ders";
 import { Terimler } from "./pages/Terimler";
 import { Yenilikler } from "./pages/Yenilikler";
@@ -27,6 +29,7 @@ import { haftaEtiketi } from "./dersler";
 function baslik(route: Route, topicTitle?: string): string {
   switch (route.page) {
     case "lab": return "SANAL LAB";
+    case "cikmis": return route.sinav ? `ÇIKMIŞ SORULAR - ${sinavBul(route.sinav)?.ad ?? "Sınav"}` : "ÇIKMIŞ SORULAR";
     case "sorular": return `SORU HAVUZU - ${topicTitle ?? (route.hafta ? haftaEtiketi(route.hafta) : "Tüm sorular")}`;
     case "ders": return route.hafta ? `ÜNİTE - ${haftaEtiketi(route.hafta)}` : "ÜNİTELER";
     case "ilerleme": return "İLERLEME - Konu bazlı durum";
@@ -91,6 +94,7 @@ export function App() {
             </div>
           )}
           {route.page === "lab" && <Lab deney={route.deney} />}
+          {route.page === "cikmis" && <Cikmis sinav={route.sinav} />}
           {route.page === "ders" && <Ders hafta={route.hafta} />}
           {route.page === "ilerleme" && <Progress />}
           {route.page === "tekrar" && <Tekrar />}
