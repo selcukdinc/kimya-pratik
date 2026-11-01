@@ -5,14 +5,17 @@ import { terimleriAyir } from "../lib/terimler";
 import { SEKIL_DESENI } from "../gorseller";
 import { Sekil } from "./Sekil";
 
-// Düz metindeki terimlerin ardına İngilizce karşılıklarını ekler: "VE (AND)"
-function terimli(metin: string): ReactNode {
+// Düz metindeki terimlerin ardına İngilizce karşılıklarını ekler: "damıtma (distillation)".
+// gorulen verilirse her terimin İngilizcesi o metinde yalnızca ilk kullanımda yazılır.
+type TerimAyari = boolean | Set<string>;
+
+function terimli(metin: string, gorulen?: Set<string>): ReactNode {
   const parcalar = terimleriAyir(metin);
   if (parcalar.length === 1 && typeof parcalar[0] === "string") return metin;
   return parcalar.map((p, i) =>
-    typeof p === "string" ? (
-      <Fragment key={i}>{p}</Fragment>
-    ) : (
+    typeof p === "string" || gorulen?.has(p.en) ? (
+      <Fragment key={i}>{typeof p === "string" ? p : p.metin}</Fragment>
+    ) : (gorulen?.add(p.en), 
       <Fragment key={i}>
         {p.metin}
         <span className="terim-en" lang="en"> ({p.en})</span>
@@ -35,8 +38,8 @@ function formul(tex: string, blok: boolean, key: string | number): ReactNode {
 // satırlardan not kutusu ve tek başına [[G-H1-01]] yazılan paragraflardan şekil.
 // terim: ders ve soru metinlerinde terimlerin İngilizcesi gösterilir; kod
 // parçalarına dokunulmaz.
-export function inline(text: string, terim = false): ReactNode[] {
-  const duz = (s: string) => (terim ? terimli(s) : s);
+export function inline(text: string, terim: TerimAyari = false): ReactNode[] {
+  const duz = (s: string) => (terim ? terimli(s, terim instanceof Set ? terim : undefined) : s);
   return text.split(/(`[^`]+`|\$[^$\n]+\$|\*\*[^*]+\*\*)/g).map((part, i) => {
     if (part.startsWith("`") && part.endsWith("`")) return <code key={i}>{part.slice(1, -1)}</code>;
     if (part.length > 2 && part.startsWith("$") && part.endsWith("$")) return formul(part.slice(1, -1), false, i);
@@ -55,7 +58,7 @@ const NOT_TURLERI: [RegExp, string][] = [
 
 const hucreler = (satir: string) => satir.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map((h) => h.trim());
 
-function blok(p: string, key: string, terim: boolean): ReactNode {
+function blok(p: string, key: string, terim: TerimAyari): ReactNode {
   const sekil = SEKIL_DESENI.exec(p);
   if (sekil) return <Sekil key={key} kod={sekil[1]!} />;
   if (p.startsWith("$$") && p.endsWith("$$") && p.length > 4) return formul(p.slice(2, -2).trim(), true, key);
@@ -101,7 +104,7 @@ function blok(p: string, key: string, terim: boolean): ReactNode {
   return <p key={key}>{inline(p, terim)}</p>;
 }
 
-function bloklar(text: string, key: string, terim: boolean): ReactNode[] {
+function bloklar(text: string, key: string, terim: TerimAyari): ReactNode[] {
   return text
     .split(/\n{2,}/)
     .map((p) => p.trim())
@@ -110,11 +113,13 @@ function bloklar(text: string, key: string, terim: boolean): ReactNode[] {
 }
 
 export function Markdown({ text, terim = false }: { text: string; terim?: boolean }) {
+  // Terimlerin İngilizcesi her metinde (ders bölümü, soru) yalnızca ilk kullanımda yazılır
+  const ayar: TerimAyari = terim ? new Set<string>() : false;
   const blocks = text.replace(/\\n(?![a-z])/g, "\n").split(/```(?:matlab)?\n?([\s\S]*?)```/g);
   return (
     <div className="md">
       {blocks.map((b, i) =>
-        i % 2 === 1 ? <pre key={i} className="code">{b.trimEnd()}</pre> : bloklar(b, String(i), terim),
+        i % 2 === 1 ? <pre key={i} className="code">{b.trimEnd()}</pre> : bloklar(b, String(i), ayar),
       )}
     </div>
   );

@@ -1,5 +1,6 @@
 // /lab: Sanal Lab. Deney kataloğu ve seçilen deneyin düzeneği.
 
+import { Suspense } from "react";
 import { href } from "../lib/router";
 import { DENEYLER, deneyBul } from "../lab/deneyler";
 import { dersBul, haftaEtiketi } from "../dersler";
@@ -46,7 +47,13 @@ export function Lab({ deney }: { deney?: string }) {
         <h2>{d.ad}</h2>
         <p className="hint">{d.ozet}</p>
       </header>
-      {Bilesen ? <Bilesen /> : <p className="empty">Bu deney hazırlanıyor.</p>}
+      {Bilesen ? (
+        <Suspense fallback={<p className="hint">Deney yükleniyor…</p>}>
+          <Bilesen />
+        </Suspense>
+      ) : (
+        <p className="empty">Bu deney hazırlanıyor.</p>
+      )}
       <nav className="ders-gezinti" aria-label="Deneyler">
         <a href="/lab">← Tüm deneyler</a>
         <a href={href({ page: "ders", hafta: d.unite })}>Üniteyi oku →</a>
