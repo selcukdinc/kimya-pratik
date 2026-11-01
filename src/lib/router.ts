@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 export type Route =
   | { page: "lab"; deney?: string }
+  | { page: "cikmis"; sinav?: string }
   | { page: "sorular"; topic?: string; hafta?: number }
   | { page: "ders"; hafta?: number }
   | { page: "ilerleme" }
@@ -48,6 +49,8 @@ export function parsePath(path: string, search = ""): Route {
       return { page: "lab" };
     case "lab":
       return arg ? { page: "lab", deney: parca(arg) } : { page: "lab" };
+    case "cikmis":
+      return arg ? { page: "cikmis", sinav: parca(arg) } : { page: "cikmis" };
     case "sorular": {
       if (arg) return { page: "sorular", topic: parca(arg) };
       const hafta = Number(new URLSearchParams(search).get("hafta"));
@@ -107,6 +110,8 @@ export function href(route: Route): string {
       return route.sekme && route.sekme !== "profil" ? `/ayarlar/${route.sekme}` : "/ayarlar";
     case "lab":
       return route.deney ? `/lab/${encodeURIComponent(route.deney)}` : "/lab";
+    case "cikmis":
+      return route.sinav ? `/cikmis/${encodeURIComponent(route.sinav)}` : "/cikmis";
     case "yonetim": {
       const ek = route.soru ?? route.alt;
       return `/yonetim${route.bolum === "genel" ? "" : `/${route.bolum}`}${ek ? `/${encodeURIComponent(ek)}` : ""}`;
