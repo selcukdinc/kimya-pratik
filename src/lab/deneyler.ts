@@ -2,7 +2,12 @@
 // etkileşimli bir düzenektir; bir üniteye ve o ünitenin sorularına bağlanır.
 // Bileşeni henüz yazılmamış deneyler katalogda "Yakında" diye görünür.
 
-import type { ComponentType } from "react";
+import { lazy, type ComponentType } from "react";
+
+// Deney bileşenleri ayrı parçalar olarak yalnızca açıldıklarında yüklenir
+const Ayirma = lazy(() => import("./Ayirma"));
+const Sicaklik = lazy(() => import("./Sicaklik"));
+const Orbital = lazy(() => import("./Orbital"));
 
 export interface Deney {
   id: string;
@@ -15,9 +20,9 @@ export interface Deney {
 }
 
 export const DENEYLER: Deney[] = [
-  { id: "ayirma", ad: "Karışım ayırma tezgâhı", unite: 1, ozet: "Bir karışım ve bir yöntem seç: süzme, mıknatıs, damıtma ya da kristallendirme. Doğru yöntem karışımı ayırır, yanlışsa nedenini görürsün." },
-  { id: "sicaklik", ad: "Termometre ve birim dönüştürücü", unite: 2, ozet: "°C, °F ve K ölçekleri arasında sürükleyerek dönüşüm yap; suyun donma ve kaynama noktalarını üç ölçekte karşılaştır." },
-  { id: "orbital", ad: "Orbital doldurma", unite: 4, ozet: "Elektronları orbital kutularına yerleştir. Aufbau, Pauli ve Hund kurallarını çiğnersen uyarı alırsın; dizilimden periyot ve grubu bul." },
+  { id: "ayirma", ad: "Karışım ayırma tezgâhı", unite: 1, bilesen: Ayirma, ozet: "Bir karışım ve bir yöntem seç: süzme, mıknatıs, damıtma ya da kristallendirme. Doğru yöntem karışımı ayırır, yanlışsa nedenini görürsün." },
+  { id: "sicaklik", ad: "Termometre ve birim dönüştürücü", unite: 2, bilesen: Sicaklik, ozet: "°C, °F ve K ölçekleri arasında sürükleyerek dönüşüm yap; suyun donma ve kaynama noktalarını üç ölçekte karşılaştır." },
+  { id: "orbital", ad: "Orbital doldurma", unite: 4, bilesen: Orbital, ozet: "Elektronları orbital kutularına yerleştir. Aufbau, Pauli ve Hund kurallarını çiğnersen uyarı alırsın; dizilimden periyot ve grubu bul." },
   { id: "periyodik", ad: "Periyodik eğilim haritası", unite: 5, ozet: "Atom yarıçapı, iyonlaşma enerjisi, elektron ilgisi ve elektronegatifliği renk ölçeğiyle tablo üzerinde gör." },
   { id: "mol", ad: "Mol terazisi", unite: 6, ozet: "Bir maddeyi tart; mol sayısını, molekül sayısını ve atom sayısını sırasıyla hesapla." },
   { id: "vsepr", ad: "VSEPR molekül kurucu", unite: 7, ozet: "Merkez atoma bağ ve ortaklanmamış elektron çifti ekle; geometri, bağ açısı, hibritleşme ve polarlık hesaplanır." },

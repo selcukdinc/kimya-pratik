@@ -8,16 +8,20 @@
 
 import type { Ders, Donem } from "./tipler";
 import { haftaAdi } from "./tipler";
+import { UNITE_1 } from "./unite-1";
+import { UNITE_2 } from "./unite-2";
+import { UNITE_3 } from "./unite-3";
+import { UNITE_4 } from "./unite-4";
 
 const iskelet = (hafta: number, donem: Donem, baslik: string, ozet: string): Ders => ({
   hafta, donem, baslik, ozet, bolumler: [], test: [],
 });
 
 export const DERSLER: Ders[] = [
-  iskelet(1, "vize", "Madde, karışımlar ve ayırma yöntemleri", "Saf madde, element, bileşik ve karışım; fiziksel ve kimyasal olaylar; süzme, damıtma, kristallendirme."),
-  iskelet(2, "vize", "Ölçme, birimler ve kimya kanunları", "SI birimleri, sıcaklık ölçekleri, anlamlı rakamlar; kütlenin korunumu, sabit ve katlı oranlar."),
-  iskelet(3, "vize", "Atom modelleri ve atomun yapısı", "Dalton, Thomson, Rutherford ve Bohr modelleri; proton, nötron, elektron; izotoplar."),
-  iskelet(4, "vize", "Kuantum sayıları ve elektron dizilimi", "Işık ve foton, De Broglie, belirsizlik; kuantum sayıları; Aufbau, Pauli ve Hund."),
+  UNITE_1,
+  UNITE_2,
+  UNITE_3,
+  UNITE_4,
   iskelet(5, "vize", "Periyodik tablo ve periyodik özellikler", "Periyot ve grup; atom yarıçapı, iyonlaşma enerjisi, elektron ilgisi ve elektronegatiflik."),
   iskelet(6, "vize", "Mol kavramı ve kimyasal bileşikler", "Mol, Avogadro sayısı, mol kütlesi; basit ve molekül formülü; bileşiklerin adlandırılması."),
   iskelet(7, "vize", "Kimyasal bağlar ve molekül geometrisi", "İyonik, kovalent ve metalik bağ; Lewis yapıları; hibritleşme ve VSEPR."),

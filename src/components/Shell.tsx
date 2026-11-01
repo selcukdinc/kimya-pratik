@@ -239,7 +239,7 @@ export function Shell({ route, currentWeek, title, status, duyuru, children }: P
       <div className="menu-perde" onClick={() => setMenuAcik(false)} aria-hidden="true" />
       <aside className="flow-nav" id="ana-menu" aria-label="Ana menü">
         <div className="panel-title">
-          <span className="nav-ad">FLOW NAVIGATOR</span>
+          <span className="nav-ad">MENÜ</span>
           <button className="icon menu-daralt" onClick={() => darDegistir(!dar)} aria-label={dar ? "Menüyü genişlet" : "Menüyü daralt"} title={dar ? "Menüyü genişlet" : "Menüyü daralt"}>
             <Ikon ad={dar ? "genislet" : "daralt"} />
           </button>

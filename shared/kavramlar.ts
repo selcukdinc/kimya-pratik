@@ -9,17 +9,24 @@ export interface Kavram {
 
 export const KAVRAMLAR: Record<string, Kavram> = {
   // Ünite 1
+  "madde-sinif": { ad: "Saf madde, element, bileşik ve karışım" },
   "fiziksel-kimyasal": { ad: "Fiziksel ve kimyasal değişim" },
   "karisim-ozellik": { ad: "Karışımların özellikleri" },
   "ayirma-yontemi": { ad: "Karışımları ayırma yöntemleri" },
   kristallendirme: { ad: "Kristallendirme" },
   // Ünite 2
+  "birim-donusum": { ad: "SI birimleri ve birim dönüştürme" },
+  "anlamli-rakam": { ad: "Anlamlı rakamlar" },
   "sicaklik-olcegi": { ad: "Sıcaklık ölçekleri arasında dönüşüm" },
+  yogunluk: { ad: "Yoğunluk" },
+  "kimya-kanunlari": { ad: "Kütlenin korunumu, sabit ve katlı oranlar" },
   // Ünite 3
   "dalton-modeli": { ad: "Dalton atom modeli" },
   "rutherford-modeli": { ad: "Thomson ve Rutherford atom modelleri" },
+  "atom-tanecikleri": { ad: "Proton, nötron, elektron ve izotoplar" },
   "bohr-modeli": { ad: "Bohr atom modeli" },
   // Ünite 4
+  "foton-enerjisi": { ad: "Işığın dalga boyu, frekansı ve foton enerjisi" },
   "de-broglie": { ad: "De Broglie dalga boyu" },
   "kuantum-sayilari": { ad: "Kuantum sayıları" },
   "dizilim-kurallari": { ad: "Aufbau, Pauli ve Hund kuralları" },

@@ -5,7 +5,10 @@ import { DERSLER } from "./index";
 
 // Hafta -> kavram -> bölümün sırası (0'dan). Kavramlar shared/kavramlar.ts'de.
 export const KAVRAM_BOLUMU: Record<number, Record<string, number>> = {
-  // Ünite -> kavram -> bölüm sırası; üniteler kendi eşlemelerini ekler
+  1: { "madde-sinif": 0, "karisim-ozellik": 0, "fiziksel-kimyasal": 1, "ayirma-yontemi": 2, kristallendirme: 3 },
+  2: { "birim-donusum": 0, "anlamli-rakam": 0, "sicaklik-olcegi": 1, yogunluk: 2, "kimya-kanunlari": 3 },
+  3: { "dalton-modeli": 0, "rutherford-modeli": 1, "atom-tanecikleri": 2, "bohr-modeli": 3 },
+  4: { "foton-enerjisi": 0, "de-broglie": 1, "kuantum-sayilari": 2, "dizilim-kurallari": 3 },
 };
 
 export interface SoruBolumu {
