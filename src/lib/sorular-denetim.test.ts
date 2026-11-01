@@ -1,10 +1,11 @@
-// Soru havuzundaki çoktan seçmeli soruların şıkları adil mi (bkz. sik-denetimi.ts)
+// Türetilmiş çoktan seçmeli soruların şıkları adil mi (bkz. sik-denetimi.ts).
+// Çıkmış sorular sınavdaki şıklarıyla kalır, bu denetime girmez.
 import { describe, expect, it } from "vitest";
 import { sorular } from "../../content/sorular/index";
 import { sikUyarilari } from "./sik-denetimi";
 
 describe("şık denetimi", () => {
-  const mcq = sorular.flatMap((s) => (s.tip === "mcq" ? [[s.id, s.secenekler, s.dogru] as const] : []));
+  const mcq = sorular.flatMap((s) => (s.tip === "mcq" && s.kaynak === "derived" ? [[s.id, s.secenekler, s.dogru] as const] : []));
   it.each(mcq)("%s", (_, secenekler, dogru) => {
     expect(sikUyarilari(secenekler, dogru)).toEqual([]);
   });

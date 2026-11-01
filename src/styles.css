@@ -733,6 +733,11 @@ textarea.mono { font-family: var(--mono); font-size: 12.5px; }
 .ders-listesi a:hover { border-color: var(--btn-primary-border); background: var(--msg-hover); }
 .ders-listesi strong { font-size: 15px; }
 .ders-listesi .ders-kart-pasif { display: flex; flex-direction: column; gap: 3px; padding: 10px 14px; background: var(--panel); border: 1px dashed var(--border); border-radius: 4px; color: var(--text); opacity: 0.85; }
+.deneme-ozet { background: var(--panel); border: 1px solid var(--border); border-left: 4px solid var(--btn-primary-border); padding: 10px 14px; margin: 12px 0; }
+.deneme-ozet h3 { margin: 0 0 4px; }
+.deneme-dokum { border-collapse: collapse; margin: 8px 0; width: 100%; max-width: 560px; }
+.deneme-dokum th, .deneme-dokum td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--border); }
+.deneme-alt { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: flex-end; margin: 16px 0; }
 .donem-baslik { margin: 18px 0 8px; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted, inherit); }
 .ders-hafta { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
 .ders-etiketler { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 3px; }

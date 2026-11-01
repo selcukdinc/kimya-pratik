@@ -6,6 +6,8 @@ describe("yönlendirici", () => {
     for (const r of [
       { page: "lab" },
       { page: "lab", deney: "ayirma" },
+      { page: "cikmis" },
+      { page: "cikmis", sinav: "vize-2024" },
       { page: "sorular" },
       { page: "sorular", topic: "mol-kavrami" },
       { page: "sorular", hafta: 3 },
