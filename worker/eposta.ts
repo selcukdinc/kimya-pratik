@@ -10,7 +10,7 @@ export interface EpostaEnv {
 
 export const epostaAcik = (env: EpostaEnv) => !!env.RESEND_API_KEY || env.EPOSTA_KONSOL === "1";
 
-const GONDEREN = "Kimya Pratik <noreply@kimya.selcukdinc.dev>";
+const GONDEREN = "Kimya Pratik <kimyapratik@mail.selcukdinc.dev>";
 
 const AMAC = {
   kayit: { konu: "Kayıt kodun", cumle: "Kimya Pratik hesabını açmak için bu kodu gir" },
